@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     struct Denomination {
@@ -18,6 +19,9 @@ class ViewController: UIViewController {
     @IBOutlet var denominationBLabels: [UILabel]!
     @IBOutlet weak var betB: UIButton!
     @IBOutlet weak var rollBtnB: UIButton!
+    @IBOutlet weak var oneThousandBLabel: UILabel!
+    @IBOutlet weak var fiveHundredLabel: UILabel!
+    @IBOutlet weak var oneHundredLabel: UILabel!
     @IBOutlet weak var rollBtnA: UIButton!
     @IBOutlet weak var bLabel: UILabel!
     @IBOutlet weak var playerLabel: UILabel!
@@ -35,11 +39,9 @@ class ViewController: UIViewController {
     var playerADenomination = Denomination()
     var playerBDenomination = Denomination(player: "B", oneThousand: 2, fiveHundred: 5, oneHundred: 4)
     let diceImageNames = ["one", "two", "three", "four", "five", "six"]
+    let player = AVPlayer()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        playerDenominationArray.append(playerADenomination)
-//        playerDenominationArray.append(playerBDenomination)
         rotatePlayerBLabel()
         resetGame()
     }
@@ -115,6 +117,12 @@ class ViewController: UIViewController {
     
     
     @IBAction func rollBtn(_ sender: Any) {
+        //音效
+        let fileUrl = Bundle.main.url(forResource: "diceRollSoundEffect", withExtension: "mp3")!
+        let playerItem = AVPlayerItem(url: fileUrl)
+        player.replaceCurrentItem(with: playerItem)
+        player.play()
+        //換骰子照片
         var diceNumAArray = [Int]()
         var diceNumBArray = [Int]()
         var diceASum = 0
@@ -140,9 +148,8 @@ class ViewController: UIViewController {
         //比大
         if bigOrSmallSegment.selectedSegmentIndex == 0 {
             if diceNumAArray[0] == diceNumAArray[1], diceNumAArray[0] == diceNumAArray[2] {
-                //1:10
-                remainMoneyA += betMoneyB * 10
-                remainMoneyB -= betMoneyB * 10
+                remainMoneyA += betMoneyB
+                remainMoneyB -= betMoneyB
                 if remainMoneyB <= 0 {
                     wordingLabelA.text = "You Win!"
                     wordingLabelB.text = "Over."
@@ -167,9 +174,8 @@ class ViewController: UIViewController {
                 wordingLabelA.text = "Deuce!"
                 wordingLabelB.text = "Deuce!"
             } else if diceNumBArray[0] == diceNumBArray[1], diceNumBArray[0] == diceNumBArray[2]{
-                //1:10
-                remainMoneyA -= betMoneyA * 10
-                remainMoneyB += betMoneyA * 10
+                remainMoneyA -= betMoneyA
+                remainMoneyB += betMoneyA
                 if remainMoneyA <= 0 {
                     wordingLabelA.text = "Over."
                     wordingLabelB.text = "You Win!"
@@ -182,8 +188,8 @@ class ViewController: UIViewController {
             //比小
         } else {
             if diceNumAArray[0] == diceNumAArray[1], diceNumAArray[0] == diceNumAArray[2] {
-                remainMoneyA += betMoneyB * 10
-                remainMoneyB -= betMoneyB * 10
+                remainMoneyA += betMoneyB
+                remainMoneyB -= betMoneyB
                 if remainMoneyB <= 0 {
                     wordingLabelA.text = "You Win!"
                     wordingLabelB.text = "Over."
@@ -208,8 +214,8 @@ class ViewController: UIViewController {
                 wordingLabelA.text = "Deuce!"
                 wordingLabelB.text = "Deuce!"
             } else if diceNumBArray[0] == diceNumBArray[1], diceNumBArray[0] == diceNumBArray[2]{
-                remainMoneyA -= betMoneyA * 10
-                remainMoneyB += betMoneyA * 10
+                remainMoneyA -= betMoneyA
+                remainMoneyB += betMoneyA
                 if remainMoneyA <= 0 {
                     wordingLabelA.text = "Over."
                     wordingLabelB.text = "You Win!"
@@ -241,6 +247,14 @@ class ViewController: UIViewController {
             wordingLabelB.text = "You Win!"
         }
         print(remainMoneyA, remainMoneyB)
+        //animation
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
+            for i in 0...2 {
+                let number = Float.random(in: 360...720)
+                self.playerADiceImages[i].transform = CGAffineTransform(rotationAngle: .pi * CGFloat(number))
+                self.playerBDiceImages[i].transform = CGAffineTransform(rotationAngle: .pi * CGFloat(number))
+            }
+        }
     }
     
     
@@ -264,6 +278,12 @@ class ViewController: UIViewController {
         betB.transform = CGAffineTransform(rotationAngle: .pi)
         rollBtnB.transform = CGAffineTransform(rotationAngle: .pi)
         playerBBetMoney.transform = CGAffineTransform(rotationAngle: .pi)
+        oneThousandBLabel.transform = CGAffineTransform(rotationAngle: .pi)
+        oneHundredLabel.transform = CGAffineTransform(rotationAngle: .pi)
+        fiveHundredLabel.transform = CGAffineTransform(rotationAngle: .pi)
+        for i in 0...2 {
+            denominationBLabels[i].transform = CGAffineTransform(rotationAngle: .pi)
+        }
     }
     func resetGame(){
         // playerA
