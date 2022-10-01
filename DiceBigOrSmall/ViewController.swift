@@ -63,6 +63,8 @@ class ViewController: UIViewController {
             playerADenomination.fiveHundred -= 1
             betNumberA += 500
             playerABetMoney.text = "\(betNumberA)"
+            rollBtnA.layer.opacity = 1
+            rollBtnA.isEnabled = true
         }
         denominationConnectLabel()
     }
