@@ -44,6 +44,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         rotatePlayerBLabel()
         resetGame()
+        //亂數放圖片
+        for diceImage in playerADiceImages {
+            let randomNum = Int.random(in: 0...5)
+            diceImage.image = UIImage(named: diceImageNames[randomNum])
+        }
+        for diceImage in playerBDiceImages {
+            let randomNum = Int.random(in: 0...5)
+            diceImage.image = UIImage(named: diceImageNames[randomNum])
+        }
     }
 //playerA
     @IBAction func add500(_ sender: UIButton) {
@@ -52,9 +61,12 @@ class ViewController: UIViewController {
             playerADenomination.fiveHundred -= 1
             betNumberA += 500
             playerABetMoney.text = "\(betNumberA)"
+            rollBtnA.layer.opacity = 1
+            rollBtnA.isEnabled = true
+        } else {
+            rollBtnA.layer.opacity = 0.3
+            rollBtnA.isEnabled = false
         }
-        rollBtnA.layer.opacity = 1
-        rollBtnA.isEnabled = true
         denominationConnectLabel()
     }
     @IBAction func add100(_ sender: Any) {
@@ -63,9 +75,12 @@ class ViewController: UIViewController {
             playerADenomination.oneHundred -= 1
             betNumberA += 100
             playerABetMoney.text = "\(betNumberA)"
+            rollBtnA.layer.opacity = 1
+            rollBtnA.isEnabled = true
+        } else {
+            rollBtnA.layer.opacity = 0.3
+            rollBtnA.isEnabled = false
         }
-        rollBtnA.layer.opacity = 1
-        rollBtnA.isEnabled = true
         denominationConnectLabel()
     }
     @IBAction func add1000(_ sender: UIButton) {
@@ -74,11 +89,17 @@ class ViewController: UIViewController {
             playerADenomination.oneThousand -= 1
             betNumberA += 1000
             playerABetMoney.text = "\(betNumberA)"
+            rollBtnA.layer.opacity = 1
+            rollBtnA.isEnabled = true
+        } else {
+            rollBtnA.layer.opacity = 0.3
+            rollBtnA.isEnabled = false
         }
-        rollBtnA.layer.opacity = 1
-        rollBtnA.isEnabled = true
         denominationConnectLabel()
     }
+    @IBAction func rollBtnA(_ sender: Any) {
+    }
+    
     
     //playberB
     @IBAction func add100B(_ sender: Any) {
@@ -87,9 +108,12 @@ class ViewController: UIViewController {
             playerBDenomination.oneHundred -= 1
             betNumberB += 100
             playerBBetMoney.text = "\(betNumberB)"
+            rollBtnB.layer.opacity = 1
+            rollBtnB.isEnabled = true
+        } else {
+            rollBtnB.layer.opacity = 0.3
+            rollBtnB.isEnabled = false
         }
-        rollBtnB.layer.opacity = 1
-        rollBtnB.isEnabled = true
         denominationConnectLabel()
     }
     @IBAction func add500B(_ sender: Any) {
@@ -98,9 +122,12 @@ class ViewController: UIViewController {
             playerBDenomination.fiveHundred -= 1
             betNumberB += 500
             playerBBetMoney.text = "\(betNumberB)"
+            rollBtnB.layer.opacity = 1
+            rollBtnB.isEnabled = true
+        } else {
+            rollBtnB.layer.opacity = 0.3
+            rollBtnB.isEnabled = false
         }
-        rollBtnB.layer.opacity = 1
-        rollBtnB.isEnabled = true
         denominationConnectLabel()
     }
     @IBAction func add1000B(_ sender: Any) {
@@ -109,13 +136,14 @@ class ViewController: UIViewController {
             playerBDenomination.oneThousand -= 1
             betNumberB += 1000
             playerBBetMoney.text = "\(betNumberB)"
+            rollBtnB.layer.opacity = 1
+            rollBtnB.isEnabled = true
+        } else {
+            rollBtnB.layer.opacity = 0.3
+            rollBtnB.isEnabled = false
         }
-        rollBtnB.layer.opacity = 1
-        rollBtnB.isEnabled = true
         denominationConnectLabel()
     }
-    
-    
     @IBAction func rollBtn(_ sender: Any) {
         //音效
         let fileUrl = Bundle.main.url(forResource: "diceRollSoundEffect", withExtension: "mp3")!
@@ -147,23 +175,12 @@ class ViewController: UIViewController {
         var remainMoneyB = Int(playerBRemainMoney.text!)!
         //比大
         if bigOrSmallSegment.selectedSegmentIndex == 0 {
-            if diceNumAArray[0] == diceNumAArray[1], diceNumAArray[0] == diceNumAArray[2] {
-                remainMoneyA += betMoneyB
-                remainMoneyB -= betMoneyB
-                if remainMoneyB <= 0 {
-                    wordingLabelA.text = "You Win!"
-                    wordingLabelB.text = "Over."
-                    enableRollBtn(bool:false, opacity: 0.3)
-                } else {
-                    wordingLabelA.text = "You Win!"
-                    wordingLabelB.text = "You Lose!"
-                }
-            } else if diceASum > diceBSum {
+            if diceASum > diceBSum || (diceNumAArray[0] == diceNumAArray[1] && diceNumAArray[0] == diceNumAArray[2]) {
                 remainMoneyA += betMoneyB
                 remainMoneyB -= betMoneyB
                 wordingLabelA.text = "You Win!"
                 wordingLabelB.text = "You Lose!"
-            } else if diceASum < diceBSum {
+            } else if diceASum < diceBSum || (diceNumBArray[0] == diceNumBArray[1] && diceNumBArray[0] == diceNumBArray[2]) {
                 remainMoneyA -= betMoneyA
                 remainMoneyB += betMoneyA
                 wordingLabelA.text = "You Lose!"
@@ -173,37 +190,15 @@ class ViewController: UIViewController {
                 remainMoneyB += betMoneyB
                 wordingLabelA.text = "Deuce!"
                 wordingLabelB.text = "Deuce!"
-            } else if diceNumBArray[0] == diceNumBArray[1], diceNumBArray[0] == diceNumBArray[2]{
-                remainMoneyA -= betMoneyA
-                remainMoneyB += betMoneyA
-                if remainMoneyA <= 0 {
-                    wordingLabelA.text = "Over."
-                    wordingLabelB.text = "You Win!"
-                    enableRollBtn(bool:false, opacity: 0.3)
-                } else {
-                    wordingLabelA.text = "You Lose!"
-                    wordingLabelB.text = "You Win!"
-                }
             }
             //比小
         } else {
-            if diceNumAArray[0] == diceNumAArray[1], diceNumAArray[0] == diceNumAArray[2] {
-                remainMoneyA += betMoneyB
-                remainMoneyB -= betMoneyB
-                if remainMoneyB <= 0 {
-                    wordingLabelA.text = "You Win!"
-                    wordingLabelB.text = "Over."
-                    enableRollBtn(bool:false, opacity: 0.3)
-                } else {
-                    wordingLabelA.text = "You Win!"
-                    wordingLabelB.text = "You Lose!"
-                }
-            } else if diceASum > diceBSum {
+            if diceASum > diceBSum || (diceNumBArray[0] == diceNumBArray[1] && diceNumBArray[0] == diceNumBArray[2]){
                 remainMoneyA -= betMoneyA
                 remainMoneyB += betMoneyA
                 wordingLabelB.text = "You Win!"
                 wordingLabelA.text = "You Lose!"
-            } else if diceASum < diceBSum {
+            } else if diceASum < diceBSum || (diceNumAArray[0] == diceNumAArray[1] && diceNumAArray[0] == diceNumAArray[2]) {
                 remainMoneyA += betMoneyB
                 remainMoneyB -= betMoneyB
                 wordingLabelB.text = "You Lose!"
@@ -213,40 +208,22 @@ class ViewController: UIViewController {
                 remainMoneyB += betMoneyB
                 wordingLabelA.text = "Deuce!"
                 wordingLabelB.text = "Deuce!"
-            } else if diceNumBArray[0] == diceNumBArray[1], diceNumBArray[0] == diceNumBArray[2]{
-                remainMoneyA -= betMoneyA
-                remainMoneyB += betMoneyA
-                if remainMoneyA <= 0 {
-                    wordingLabelA.text = "Over."
-                    wordingLabelB.text = "You Win!"
-                    enableRollBtn(bool:false, opacity: 0.3)
-                } else {
-                    wordingLabelA.text = "You Lose!"
-                    wordingLabelB.text = "You Win!"
-                }
             }
         }
         betMoneyZero()
         enableRollBtn(bool:false, opacity: 0.3)
         playerARemainMoney.text = "\(remainMoneyA)"
         playerBRemainMoney.text = "\(remainMoneyB)"
-        //誰的錢先為零元 結束
-        if remainMoneyA == 0 {
-            wordingLabelA.text = "Over."
-            wordingLabelB.text = "You Win!"
-        } else if remainMoneyB == 0 {
+        //用完錢幣數量&誰的錢先為零元 結束
+        if remainMoneyA > remainMoneyB && (((playerADenomination.oneThousand == 0 && playerADenomination.fiveHundred == 0) && playerADenomination.oneHundred == 0) || ((playerBDenomination.oneThousand == 0 && playerBDenomination.fiveHundred == 0) && playerBDenomination.oneHundred == 0) || remainMoneyB == 0) {
             wordingLabelB.text = "Over."
-            wordingLabelA.text = "You Win!"
-        }
-        //用完錢幣數量 結束
-        if remainMoneyA > remainMoneyB && ((playerADenomination.oneThousand == 0 && playerADenomination.fiveHundred == 0) && playerADenomination.oneHundred == 0) || ((playerBDenomination.oneThousand == 0 && playerBDenomination.fiveHundred == 0) && playerBDenomination.oneHundred == 0) {
-            wordingLabelB.text = "Over."
-            wordingLabelA.text = "You Win!"
-        } else if remainMoneyA < remainMoneyB && ((playerADenomination.oneThousand == 0 && playerADenomination.fiveHundred == 0) && playerADenomination.oneHundred == 0) || ((playerBDenomination.oneThousand == 0 && playerBDenomination.fiveHundred == 0) && playerBDenomination.oneHundred == 0) {
+            wordingLabelA.text = "Winner!"
+            enableRollBtn(bool:false, opacity: 0.3)
+        } else if remainMoneyA < remainMoneyB && (((playerADenomination.oneThousand == 0 && playerADenomination.fiveHundred == 0) && playerADenomination.oneHundred == 0) || ((playerBDenomination.oneThousand == 0 && playerBDenomination.fiveHundred == 0) && playerBDenomination.oneHundred == 0) || remainMoneyA == 0) {
             wordingLabelA.text = "Over."
-            wordingLabelB.text = "You Win!"
+            wordingLabelB.text = "Winner!"
+            enableRollBtn(bool:false, opacity: 0.3)
         }
-        print(remainMoneyA, remainMoneyB)
         //animation
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
             for i in 0...2 {
