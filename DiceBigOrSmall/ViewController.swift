@@ -35,7 +35,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var wordingLabelA: UILabel!
     @IBOutlet weak var bigOrSmallSegment: UISegmentedControl!
     @IBOutlet var playerADiceImages: [UIImageView]!
-//    var playerDenominationArray = [Denomination]()
     var playerADenomination = Denomination()
     var playerBDenomination = Denomination(player: "B", oneThousand: 2, fiveHundred: 5, oneHundred: 4)
     let diceImageNames = ["one", "two", "three", "four", "five", "six"]
@@ -287,4 +286,3 @@ class ViewController: UIViewController {
         rollBtnB.isEnabled = bool
     }
 }
-
