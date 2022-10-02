@@ -9,13 +9,6 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
-    struct Denomination {
-        var player = "A"
-        var oneThousand = 2
-        var fiveHundred = 5
-        var oneHundred = 4
-    }
-    
     @IBOutlet var addBetBtnsB: [UIButton]!
     @IBOutlet var addBetBtnsA: [UIButton]!
     @IBOutlet weak var playerBBetMoney: UILabel!
@@ -60,77 +53,59 @@ class ViewController: UIViewController {
         }
     }
 //playerA
-    @IBAction func add500(_ sender: UIButton) {
+    @IBAction func addMoneyA(_ sender: UIButton) {
         var betNumberA = Int(playerABetMoney.text!)!
-        if playerADenomination.fiveHundred > 0 {
-            playerADenomination.fiveHundred -= 1
-            betNumberA += 500
-            playerABetMoney.text = "\(betNumberA)"
-            if playerBBetMoney.text != "0" && wordingLabelB.text != "waiting" {
-                enableRollBtn(bool: true, opacity: 1)
+        switch sender.tag {
+        case 0 :
+            if playerADenomination.oneThousand > 0 {
+                playerADenomination.oneThousand -= 1
+                betNumberA += 1000
             }
+        case 1:
+            if playerADenomination.fiveHundred > 0 {
+                playerADenomination.fiveHundred -= 1
+                betNumberA += 500
+            }
+        case 2:
+            if playerADenomination.oneHundred > 0 {
+                playerADenomination.oneHundred -= 1
+                betNumberA += 100
+            }
+        default:
+            break
         }
-        denominationConnectLabel()
-    }
-    @IBAction func add100(_ sender: Any) {
-        var betNumberA = Int(playerABetMoney.text!)!
-        if playerADenomination.oneHundred > 0 {
-            playerADenomination.oneHundred -= 1
-            betNumberA += 100
-            playerABetMoney.text = "\(betNumberA)"
-            if playerBBetMoney.text != "0" && wordingLabelB.text != "waiting"{
-                enableRollBtn(bool: true, opacity: 1)
-            }
-        }
-        denominationConnectLabel()
-    }
-    @IBAction func add1000(_ sender: UIButton) {
-        var betNumberA = Int(playerABetMoney.text!)!
-        if playerADenomination.oneThousand > 0 {
-            playerADenomination.oneThousand -= 1
-            betNumberA += 1000
-            playerABetMoney.text = "\(betNumberA)"
-            if playerBBetMoney.text != "0" && wordingLabelB.text != "waiting"{
-                enableRollBtn(bool: true, opacity: 1)
-            }
+        playerABetMoney.text = "\(betNumberA)"
+        if playerBBetMoney.text != "0" && wordingLabelB.text != "waiting"{
+            enableRollBtn(bool: true, opacity: 1)
         }
         denominationConnectLabel()
     }
     
     //playberB
-    @IBAction func add100B(_ sender: Any) {
+    @IBAction func addMoneyB(_ sender: UIButton) {
         var betNumberB = Int(playerBBetMoney.text!)!
-        if playerBDenomination.oneHundred > 0 {
-            playerBDenomination.oneHundred -= 1
-            betNumberB += 100
-            playerBBetMoney.text = "\(betNumberB)"
-            if playerABetMoney.text != "0" && wordingLabelA.text != "waiting"{
-                enableRollBtn(bool: true, opacity: 1)
+        switch sender.tag {
+        case 0:
+            if playerBDenomination.oneThousand > 0 {
+                playerBDenomination.oneThousand -= 1
+                betNumberB += 1000
             }
+        case 1:
+            if playerBDenomination.fiveHundred > 0 {
+                playerBDenomination.fiveHundred -= 1
+                betNumberB += 500
+            }
+        case 2:
+            if playerBDenomination.oneThousand > 0 {
+                playerBDenomination.oneThousand -= 1
+                betNumberB += 1000
+            }
+        default:
+            break
         }
-        denominationConnectLabel()
-    }
-    @IBAction func add500B(_ sender: Any) {
-        var betNumberB = Int(playerBBetMoney.text!)!
-        if playerBDenomination.fiveHundred > 0 {
-            playerBDenomination.fiveHundred -= 1
-            betNumberB += 500
-            playerBBetMoney.text = "\(betNumberB)"
-            if playerABetMoney.text != "0" && wordingLabelA.text != "waiting"{
-                enableRollBtn(bool: true, opacity: 1)
-            }
-        }
-        denominationConnectLabel()
-    }
-    @IBAction func add1000B(_ sender: Any) {
-        var betNumberB = Int(playerBBetMoney.text!)!
-        if playerBDenomination.oneThousand > 0 {
-            playerBDenomination.oneThousand -= 1
-            betNumberB += 1000
-            playerBBetMoney.text = "\(betNumberB)"
-            if playerABetMoney.text != "0" && wordingLabelA.text != "waiting"{
-                enableRollBtn(bool: true, opacity: 1)
-            }
+        playerBBetMoney.text = "\(betNumberB)"
+        if playerABetMoney.text != "0" && wordingLabelA.text != "waiting"{
+            enableRollBtn(bool: true, opacity: 1)
         }
         denominationConnectLabel()
     }
@@ -175,7 +150,6 @@ class ViewController: UIViewController {
                     addBetBtnsB[i].isEnabled = false
                 }
             }
-            
         case 2:
             for diceImage in playerBDiceImages {
                 let randomNum = Int.random(in: 0...5)

@@ -58,25 +58,25 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="1000"/>
                                 <connections>
-                                    <action selector="add1000:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CiD-It-Nlz"/>
+                                    <action selector="addMoneyA:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5ZI-6U-oHq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyT-dy-yIt">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyT-dy-yIt">
                                 <rect key="frame" x="233" y="735" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="100"/>
                                 <connections>
-                                    <action selector="add100:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Dc-LQ-5rS"/>
+                                    <action selector="addMoneyA:" destination="BYZ-38-t0r" eventType="touchUpInside" id="80W-Bt-uoC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quy-qN-Yrv">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quy-qN-Yrv">
                                 <rect key="frame" x="127" y="735" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="500"/>
                                 <connections>
-                                    <action selector="add500:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wYN-Vl-yCK"/>
+                                    <action selector="addMoneyA:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ytg-Wk-hIU"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wY5-bb-0i4">
@@ -217,25 +217,25 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="1000B"/>
                                 <connections>
-                                    <action selector="add1000B:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cIc-Kj-RV7"/>
+                                    <action selector="addMoneyB:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vQ-Mt-wPN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ak-7r-4vW">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ak-7r-4vW">
                                 <rect key="frame" x="119" y="-2" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="500B"/>
                                 <connections>
-                                    <action selector="add500B:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QF9-Zp-phN"/>
+                                    <action selector="addMoneyB:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jky-yR-pQG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97N-Sa-yOe">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97N-Sa-yOe">
                                 <rect key="frame" x="233" y="-27" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="100B"/>
                                 <connections>
-                                    <action selector="add100B:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UC5-Df-uUZ"/>
+                                    <action selector="addMoneyB:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Puj-GE-GKW"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000x" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1r-xo-mqv">
