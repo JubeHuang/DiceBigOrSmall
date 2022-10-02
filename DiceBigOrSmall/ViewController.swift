@@ -63,8 +63,9 @@ class ViewController: UIViewController {
             playerADenomination.fiveHundred -= 1
             betNumberA += 500
             playerABetMoney.text = "\(betNumberA)"
-            rollBtnA.layer.opacity = 1
-            rollBtnA.isEnabled = true
+            if playerBBetMoney.text != "0" {
+                enableRollBtn(bool: true, opacity: 1)
+            }
         }
         denominationConnectLabel()
     }
@@ -74,8 +75,9 @@ class ViewController: UIViewController {
             playerADenomination.oneHundred -= 1
             betNumberA += 100
             playerABetMoney.text = "\(betNumberA)"
-            rollBtnA.layer.opacity = 1
-            rollBtnA.isEnabled = true
+            if playerBBetMoney.text != "0" {
+                enableRollBtn(bool: true, opacity: 1)
+            }
         }
         denominationConnectLabel()
     }
@@ -85,8 +87,9 @@ class ViewController: UIViewController {
             playerADenomination.oneThousand -= 1
             betNumberA += 1000
             playerABetMoney.text = "\(betNumberA)"
-            rollBtnA.layer.opacity = 1
-            rollBtnA.isEnabled = true
+            if playerBBetMoney.text != "0" {
+                enableRollBtn(bool: true, opacity: 1)
+            }
         }
         denominationConnectLabel()
     }
@@ -98,8 +101,9 @@ class ViewController: UIViewController {
             playerBDenomination.oneHundred -= 1
             betNumberB += 100
             playerBBetMoney.text = "\(betNumberB)"
-            rollBtnB.layer.opacity = 1
-            rollBtnB.isEnabled = true
+            if playerABetMoney.text != "0" {
+                enableRollBtn(bool: true, opacity: 1)
+            }
         }
         denominationConnectLabel()
     }
@@ -109,8 +113,9 @@ class ViewController: UIViewController {
             playerBDenomination.fiveHundred -= 1
             betNumberB += 500
             playerBBetMoney.text = "\(betNumberB)"
-            rollBtnB.layer.opacity = 1
-            rollBtnB.isEnabled = true
+            if playerABetMoney.text != "0" {
+                enableRollBtn(bool: true, opacity: 1)
+            }
         }
         denominationConnectLabel()
     }
@@ -120,8 +125,9 @@ class ViewController: UIViewController {
             playerBDenomination.oneThousand -= 1
             betNumberB += 1000
             playerBBetMoney.text = "\(betNumberB)"
-            rollBtnB.layer.opacity = 1
-            rollBtnB.isEnabled = true
+            if playerABetMoney.text != "0" {
+                enableRollBtn(bool: true, opacity: 1)
+            }
         }
         denominationConnectLabel()
     }
@@ -200,8 +206,8 @@ class ViewController: UIViewController {
                     wordingLabelA.text = "Deuce!"
                     wordingLabelB.text = "Deuce!"
                 }
-                //用完錢幣數量&誰的錢先為零元 結束
-                if ((playerADenomination.oneThousand == 0 && playerADenomination.fiveHundred == 0) && playerADenomination.oneHundred == 0) || ((playerBDenomination.oneThousand == 0 && playerBDenomination.fiveHundred == 0) && playerBDenomination.oneHundred == 0) || remainMoneyB == 0 || remainMoneyA == 0{
+                //用完錢幣數量 結束
+                if ((playerADenomination.oneThousand == 0 && playerADenomination.fiveHundred == 0) && playerADenomination.oneHundred == 0) || ((playerBDenomination.oneThousand == 0 && playerBDenomination.fiveHundred == 0) && playerBDenomination.oneHundred == 0) {
                     if remainMoneyA > remainMoneyB {
                         wordingLabelB.text = "Over."
                         wordingLabelA.text = "Winner!"
@@ -232,7 +238,7 @@ class ViewController: UIViewController {
                     wordingLabelA.text = "Deuce!"
                     wordingLabelB.text = "Deuce!"
                 }
-                if ((playerADenomination.oneThousand == 0 && playerADenomination.fiveHundred == 0) && playerADenomination.oneHundred == 0) || ((playerBDenomination.oneThousand == 0 && playerBDenomination.fiveHundred == 0) && playerBDenomination.oneHundred == 0) || remainMoneyB == 0 || remainMoneyA == 0{
+                if ((playerADenomination.oneThousand == 0 && playerADenomination.fiveHundred == 0) && playerADenomination.oneHundred == 0) || ((playerBDenomination.oneThousand == 0 && playerBDenomination.fiveHundred == 0) && playerBDenomination.oneHundred == 0) {
                     if remainMoneyA > remainMoneyB {
                         wordingLabelB.text = "Over."
                         wordingLabelA.text = "Winner!"
