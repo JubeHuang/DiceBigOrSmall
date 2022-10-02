@@ -15,6 +15,9 @@ class ViewController: UIViewController {
         var fiveHundred = 5
         var oneHundred = 4
     }
+    
+    @IBOutlet var addBetBtnsB: [UIButton]!
+    @IBOutlet var addBetBtnsA: [UIButton]!
     @IBOutlet weak var playerBBetMoney: UILabel!
     @IBOutlet weak var reStartABtn: UIButton!
     @IBOutlet var denominationBLabels: [UILabel]!
@@ -63,7 +66,7 @@ class ViewController: UIViewController {
             playerADenomination.fiveHundred -= 1
             betNumberA += 500
             playerABetMoney.text = "\(betNumberA)"
-            if playerBBetMoney.text != "0" {
+            if playerBBetMoney.text != "0" && wordingLabelB.text != "waiting" {
                 enableRollBtn(bool: true, opacity: 1)
             }
         }
@@ -75,7 +78,7 @@ class ViewController: UIViewController {
             playerADenomination.oneHundred -= 1
             betNumberA += 100
             playerABetMoney.text = "\(betNumberA)"
-            if playerBBetMoney.text != "0" {
+            if playerBBetMoney.text != "0" && wordingLabelB.text != "waiting"{
                 enableRollBtn(bool: true, opacity: 1)
             }
         }
@@ -87,7 +90,7 @@ class ViewController: UIViewController {
             playerADenomination.oneThousand -= 1
             betNumberA += 1000
             playerABetMoney.text = "\(betNumberA)"
-            if playerBBetMoney.text != "0" {
+            if playerBBetMoney.text != "0" && wordingLabelB.text != "waiting"{
                 enableRollBtn(bool: true, opacity: 1)
             }
         }
@@ -101,7 +104,7 @@ class ViewController: UIViewController {
             playerBDenomination.oneHundred -= 1
             betNumberB += 100
             playerBBetMoney.text = "\(betNumberB)"
-            if playerABetMoney.text != "0" {
+            if playerABetMoney.text != "0" && wordingLabelA.text != "waiting"{
                 enableRollBtn(bool: true, opacity: 1)
             }
         }
@@ -113,7 +116,7 @@ class ViewController: UIViewController {
             playerBDenomination.fiveHundred -= 1
             betNumberB += 500
             playerBBetMoney.text = "\(betNumberB)"
-            if playerABetMoney.text != "0" {
+            if playerABetMoney.text != "0" && wordingLabelA.text != "waiting"{
                 enableRollBtn(bool: true, opacity: 1)
             }
         }
@@ -125,7 +128,7 @@ class ViewController: UIViewController {
             playerBDenomination.oneThousand -= 1
             betNumberB += 1000
             playerBBetMoney.text = "\(betNumberB)"
-            if playerABetMoney.text != "0" {
+            if playerABetMoney.text != "0" && wordingLabelA.text != "waiting"{
                 enableRollBtn(bool: true, opacity: 1)
             }
         }
@@ -163,9 +166,16 @@ class ViewController: UIViewController {
                     self.playerADiceImages[i].transform = CGAffineTransform(rotationAngle: .pi * CGFloat(number))
                 }
             }
-            wordingLabelA.text="waiting"
+            wordingLabelA.text = "waiting"
             rollBtnA.layer.opacity = 0.3
             rollBtnA.isEnabled = false
+            //對方不能再加注
+            if wordingLabelA.text == "waiting" {
+                for i in 0...2 {
+                    addBetBtnsB[i].isEnabled = false
+                }
+            }
+            
         case 2:
             for diceImage in playerBDiceImages {
                 let randomNum = Int.random(in: 0...5)
@@ -182,12 +192,21 @@ class ViewController: UIViewController {
             wordingLabelB.text="waiting"
             rollBtnB.layer.opacity = 0.3
             rollBtnB.isEnabled = false
+            if wordingLabelB.text == "waiting" {
+                for i in 0...2 {
+                    addBetBtnsA[i].isEnabled = false
+                }
+            }
         default:
             break
         }
         // A & B 都骰了骰子
         if diceASum > 0 && diceBSum > 0 {
             betMoneyZero()
+            for i in 0...2 {
+                addBetBtnsA[i].isEnabled = true
+                addBetBtnsB[i].isEnabled = true
+            }
             //比大
             if bigOrSmallSegment.selectedSegmentIndex == 0 {
                 if diceASum > diceBSum || (diceNumAArray[0] == diceNumAArray[1] && diceNumAArray[0] == diceNumAArray[2]) {

@@ -383,6 +383,12 @@
                         <outletCollection property="denominationBLabels" destination="h57-pB-NPX" collectionClass="NSMutableArray" id="RMb-fI-cSs"/>
                         <outletCollection property="denominationBLabels" destination="9D9-Vb-ZNh" collectionClass="NSMutableArray" id="gur-vo-cMW"/>
                         <outletCollection property="denominationBLabels" destination="o7Z-gj-Lng" collectionClass="NSMutableArray" id="Ba6-U5-zRb"/>
+                        <outletCollection property="addBetBtnsA" destination="pvK-TQ-4T1" collectionClass="NSMutableArray" id="8dh-fV-8zg"/>
+                        <outletCollection property="addBetBtnsA" destination="quy-qN-Yrv" collectionClass="NSMutableArray" id="2Or-eD-wq3"/>
+                        <outletCollection property="addBetBtnsA" destination="nyT-dy-yIt" collectionClass="NSMutableArray" id="tz5-C9-cG2"/>
+                        <outletCollection property="addBetBtnsB" destination="s3E-KN-o2d" collectionClass="NSMutableArray" id="bfe-KI-pxd"/>
+                        <outletCollection property="addBetBtnsB" destination="6ak-7r-4vW" collectionClass="NSMutableArray" id="0OY-GJ-8l8"/>
+                        <outletCollection property="addBetBtnsB" destination="97N-Sa-yOe" collectionClass="NSMutableArray" id="Z2H-FF-nkh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
